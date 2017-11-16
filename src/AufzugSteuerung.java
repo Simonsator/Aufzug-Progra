@@ -106,18 +106,13 @@ public class AufzugSteuerung {
 		aufzug.tuerOeffnen();
 	}
 
-	private Integer nextLowerFloor(int pMomStockwerk) {
-		for (int i = pMomStockwerk - 1; i > stockwerkAngefragt.length; i--)
-			if (stockwerkAngefragt[i])
-				return i;
-		return null;
-	}
-
 	private Integer nextFloor() {
 		int aktuell = aktuellesStockwerk();
 		Integer nextHigherRequested = nextHigherFloor(aktuell);
 		Integer nextLowerRequested = nextLowerFloor(aktuell);
 		if (nextHigherRequested == null) {
+			if (nextLowerRequested == null)
+				return null;
 			return nextLowerRequested;
 		}
 		if (nextLowerRequested == null)
@@ -135,7 +130,15 @@ public class AufzugSteuerung {
 	private Integer nextHigherFloor(int pMomStockwerk) {
 		for (int i = pMomStockwerk + 1; i < stockwerkAngefragt.length; i++)
 			if (stockwerkAngefragt[i])
-				return i;
+				return i + aufzug.getMinStockwerk();
 		return null;
 	}
+
+	private Integer nextLowerFloor(int pMomStockwerk) {
+		for (int i = pMomStockwerk - 1; i > 0; i--)
+			if (stockwerkAngefragt[i])
+				return i + aufzug.getMinStockwerk();
+		return null;
+	}
+
 }
