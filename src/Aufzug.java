@@ -89,27 +89,23 @@ public class Aufzug {
 	}
 
 	public void aussteigen(int x) {
-		tuerOeffnen();
-		if (x >= 0 && x <= anzahlPersonen) {
-			anzahlPersonen -= x;
+		if (isTuerAuf()) {
+			if (x >= 0 && x <= anzahlPersonen) {
+				anzahlPersonen -= x;
+			}
 		}
 	}
 
 	public boolean fahren(int x) {
 		if (isTuerAuf())
 			return false;
-		if (x > stockwerke.length) {
-			aktuellesStockwerk = stockwerke.length;
+		if (x > maxStockwerk) {
+			aktuellesStockwerk = maxStockwerk;
 		} else {
-			if (x < 0) {
-				aktuellesStockwerk = 0;
+			if (x < minStockwerk) {
+				aktuellesStockwerk = minStockwerk;
 			} else {
-				for (int i = 0; i < stockwerke.length; i++) {
-					if (x == i) {
-						aktuellesStockwerk = x;
-					}
-
-				}
+				aktuellesStockwerk = x;
 			}
 		}
 		return true;
