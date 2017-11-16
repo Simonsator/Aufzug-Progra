@@ -92,8 +92,11 @@ public class Aufzug {
 
 	public void aussteigen(int x) {
 		if (isTuerAuf()) {
-			if (x >= 0 && x <= anzahlPersonen) {
-				anzahlPersonen -= x;
+			if (x < 0)
+				return;
+			anzahlPersonen -= x;
+			if (anzahlPersonen < 0) {
+				anzahlPersonen = 0;
 			}
 		}
 	}
