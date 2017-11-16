@@ -13,7 +13,7 @@ public class AufzugSteuerung {
 	public AufzugSteuerung(Aufzug aufzug) {
 		this.aufzug = aufzug;
 		aufzug.tuerOeffnen();
-		stockwerkAngefragt = new boolean[aufzug.getAktuellesStockwerk()];
+		stockwerkAngefragt = new boolean[Math.abs(aufzug.getMaxStockwerk() - aufzug.getMinStockwerk()) + 1];
 		for (int i = 0; i < stockwerkAngefragt.length; i++) {
 			stockwerkAngefragt[i] = false;
 		}
@@ -66,16 +66,16 @@ public class AufzugSteuerung {
 				nextFloor = nextFloor();
 				if (nextFloor == null)
 					return;
-				if (nextFloor > aufzug.getAktuellesStockwerk()) {
+				if (nextFloor > aktuellesStockwerk()) {
 					zustand = AufzugZustand.Hoch;
 				} else {
 					zustand = AufzugZustand.Runter;
 				}
 				break;
 			case Hoch:
-				nextFloor = nextHigherFloor(aufzug.getAktuellesStockwerk());
+				nextFloor = nextHigherFloor(aktuellesStockwerk());
 				if (nextFloor == null) {
-					nextFloor = nextLowerFloor(aufzug.getAktuellesStockwerk());
+					nextFloor = nextLowerFloor(aktuellesStockwerk());
 					if (nextFloor == null) {
 						zustand = AufzugZustand.Warten;
 						return;
@@ -87,9 +87,9 @@ public class AufzugSteuerung {
 				}
 				break;
 			case Runter:
-				nextFloor = nextLowerFloor(aufzug.getAktuellesStockwerk());
+				nextFloor = nextLowerFloor(aktuellesStockwerk());
 				if (nextFloor == null) {
-					nextFloor = nextHigherFloor(aufzug.getAktuellesStockwerk());
+					nextFloor = nextHigherFloor(aktuellesStockwerk());
 					if (nextFloor == null) {
 						zustand = AufzugZustand.Warten;
 						return;
@@ -112,12 +112,14 @@ public class AufzugSteuerung {
 	}
 
 	private Integer nextFloor() {
-		int aktuell = aufzug.getAktuellesStockwerk();
+		int aktuell = aktuellesStockwerk();
 		Integer nextHigherRequested = nextHigherFloor(aktuell);
 		Integer nextLowerRequested = nextLowerFloor(aktuell);
 		if (nextHigherRequested == null) {
 			return nextLowerRequested;
 		}
+		if (nextLowerRequested == null)
+			return nextHigherRequested;
 		if (distance(aktuell, nextHigherRequested) > distance(aktuell, nextLowerRequested)) {
 			return nextLowerRequested;
 		}
