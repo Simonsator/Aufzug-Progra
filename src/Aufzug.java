@@ -51,11 +51,7 @@ public class Aufzug {
 	}
 
 	public boolean isTuerAuf() {
-		if (tuer == true) {
-			return true;
-		} else {
-			return false;
-		}
+		return tuer;
 	}
 
 	public int getMaxStockwerk() {
@@ -81,7 +77,7 @@ public class Aufzug {
 	public int einsteigen(int x) {
 		tuerOeffnen();
 		int uebrig = 0;
-		if (isTuerAuf() == true) {
+		if (isTuerAuf()) {
 			int frei = maxPersonen - anzahlPersonen;
 			if (x <= frei && x >= 0) {
 				anzahlPersonen += x;
