@@ -75,6 +75,8 @@ public class Aufzug {
 	}
 
 	public int einsteigen(int x) {
+		if (x < 0)
+			return x;
 		if (isTuerAuf()) {
 			int frei = maxPersonen - anzahlPersonen;
 			if (x <= frei && x >= 0) {
