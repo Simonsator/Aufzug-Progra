@@ -75,18 +75,17 @@ public class Aufzug {
 	}
 
 	public int einsteigen(int x) {
-		tuerOeffnen();
-		int uebrig = 0;
 		if (isTuerAuf()) {
 			int frei = maxPersonen - anzahlPersonen;
 			if (x <= frei && x >= 0) {
 				anzahlPersonen += x;
+				return 0;
 			} else {
 				anzahlPersonen = maxPersonen;
-				uebrig = x - frei;
+				return x - frei;
 			}
 		}
-		return uebrig;
+		return x;
 	}
 
 	public void aussteigen(int x) {
@@ -97,7 +96,8 @@ public class Aufzug {
 	}
 
 	public boolean fahren(int x) {
-		tuerSchliessen();
+		if (isTuerAuf())
+			return false;
 		if (x > stockwerke.length) {
 			aktuellesStockwerk = stockwerke.length;
 		} else {
