@@ -101,7 +101,9 @@ public class AufzugSteuerung {
 				}
 				break;
 		}
+		aufzug.tuerSchliessen();
 		aufzug.fahren(nextFloor);
+		aufzug.tuerOeffnen();
 	}
 
 	private Integer nextLowerFloor(int pMomStockwerk) {

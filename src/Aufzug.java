@@ -2,7 +2,7 @@
 /**
  * Beschreiben Sie hier die Klasse Aufzug.
  *
- * @author Angelika Hez 8..., Karine Louise ...
+ * @author Angelika Hez 8..., Karine Louise ..., Simon Brungs
  */
 public class Aufzug {
 	private int aktuellesStockwerk;
@@ -16,8 +16,19 @@ public class Aufzug {
 	private int[] stockwerke;
 
 	private final int ID;
+
+	/**
+	 * Gibt an, welche ID der naechste Aufzug haben soll
+	 */
 	private static int nextID = 0;
 
+	/**
+	 * Initialisiert alle variabeln
+	 *
+	 * @param maxStockwerk Das maximale stockwerk
+	 * @param minStockwerk das mainimale stockwerk
+	 * @param maxPersonen  die maxiamle personen
+	 */
 	public Aufzug(int maxStockwerk, int minStockwerk, int maxPersonen) {
 		this.maxStockwerk = maxStockwerk;
 		this.maxPersonen = maxPersonen;
