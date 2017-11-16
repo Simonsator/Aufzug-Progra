@@ -11,15 +11,39 @@ public class Aufzug
     private int anzahlPersonen;
     private boolean tuer;
 
-    private static final int maxStockwerk;
-    private static final int minStockwerk;
-    private static final int maxPersonen;
+    private final int maxStockwerk;
+    private final int minStockwerk;
+    private final int maxPersonen;
 
-    private int[] stockwerke; 
+    private int[] stockwerke;
 
-    public Aufzug()
+    private final int ID;
+    private static int nextID=0;
+
+    public Aufzug(int maxStockwerk, int minStockwerk, int maxPersonen)
     {
+        this.maxStockwerk=maxStockwerk;
+        this.maxPersonen=maxPersonen;
+        this.minStockwerk=minStockwerk;
+        tuer=false;
+        anzahlPersonen=0;
+        aktuellesStockwerk=minStockwerk;
+        stockwerke=new int[Math.abs(maxStockwerk-minStockwerk)+1];
+        ID=nextID;
+        nextID++;
+    }
 
+    public Aufzug(int maxStockwerk,int maxPersonen)
+    {
+        this.maxStockwerk=maxStockwerk;
+        this.maxPersonen=maxPersonen;
+        minStockwerk=0;
+        tuer=false;
+        anzahlPersonen=0;
+        aktuellesStockwerk=minStockwerk;
+        stockwerke=new int[Math.abs(maxStockwerk-minStockwerk)+1];
+        ID=nextID;
+        nextID++;
     }
 
     public int getAktuellesStockwerk()
@@ -71,9 +95,10 @@ public class Aufzug
 
     public int einsteigen(int x)
     {
-        int uebrig=0; 
+        tuerOeffnen();
+        int uebrig=0;
         if(isTuerAuf()==true)
-        {
+        {             
             int frei=maxPersonen-anzahlPersonen;
             if(x<=frei && x>=0)
             {
@@ -83,19 +108,17 @@ public class Aufzug
             {
                 anzahlPersonen=maxPersonen;
                 uebrig=x-frei; 
-            }
+            }           
         }
         return uebrig;
     }
 
     public void aussteigen(int x)
     {
-        if(isTuerAuf()==true)
+        tuerOeffnen();
+        if(x>=0 && x<=anzahlPersonen)
         {
-            if(x>=0 && x<=anzahlPersonen)
-            {
-                anzahlPersonen-=x;
-            }
+            anzahlPersonen-=x;
         }
     }
 
@@ -106,18 +129,30 @@ public class Aufzug
         {
             aktuellesStockwerk=stockwerke.length;
         }
-        if(x<0)
+        else 
         {
-            aktuellesStockwerk=0;
-        }
-        for(int i=0; i<stockwerke.length; i++)
-        {
-            if(x==i)
+            if(x<0)
             {
-                aktuellesStockwerk=x;
+                aktuellesStockwerk=0;
             }
+            else 
+            {
+                for(int i=0; i<stockwerke.length; i++)
+                {
+                    if(x==i)
+                    {
+                        aktuellesStockwerk=x;
+                    }
 
+                }
+            }
         }
+        return true;
+    } 
+
+    public int getID()
+    {
+        return ID;
     }
 }
-    
+
