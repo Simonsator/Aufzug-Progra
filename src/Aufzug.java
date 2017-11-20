@@ -34,7 +34,7 @@ public class Aufzug {
 	/**
 	 * Array, der die Anzahl an Stockwerken repraesentiert
 	 */
-	int[] stockwerke;
+	private int[] stockwerke;
 	/**
 	 * Identifikationsnummer eines Aufzugs
 	 */
