@@ -140,7 +140,7 @@ public class Aufzug {
 	/**
 	 * die Methode berechnet, ob die einsteigenden Personen in den Aufzug passen und wie viele ggf. noch warten muessen
 	 *
-	 * @param es wird eine Zahl x übergeben, die die Anzahl der Personen, die einsteigen wollen, repraesentiert
+	 * @param x Es wird eine Zahl übergeben, die die Anzahl der Personen, die einsteigen wollen, repraesentiert
 	 * @return es wird zurueckgegeben, wie viele Leute nicht einsteigen konnten
 	 */
 	public int einsteigen(int x) {
@@ -163,7 +163,7 @@ public class Aufzug {
 	/**
 	 * die Methode berechnet, wie viele Personen nach dem Aussteigen, noch im Aufzug sind
 	 *
-	 * @param es wird eine Zahl x uebergeben, die die Anzahl der Personen, die aussteigen wollen, repraesentieren
+	 * @param x Es wird eine Zahl uebergeben, die die Anzahl der Personen, die aussteigen wollen, repraesentieren
 	 */
 	public void aussteigen(int x) {
 		if (isTuerAuf()) {
@@ -180,8 +180,8 @@ public class Aufzug {
 	/**
 	 * die Methode aendert das aktuelle Stockwerk auf das übergebene
 	 *
-	 * @param es wird eine Zahl x uebergeben, die fuer das Stockwerk steht, in das der Aufzug fahren soll
-	 * @@return gibt zurueck, ob der Aufzug gefahren (true) ist oder nicht (false)
+	 * @param x Es wird eine Zahl uebergeben, die fuer das Stockwerk steht, in das der Aufzug fahren soll
+	 * @return gibt zurueck, ob der Aufzug gefahren (true) ist oder nicht (false)
 	 */
 	public boolean fahren(int x) {
 		if (isTuerAuf())
